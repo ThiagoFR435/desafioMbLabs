@@ -2,13 +2,16 @@ import React from 'react';
 import { View, Text, StyleSheet , ScrollView, Image, TouchableOpacity} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 import Tickets from '../../component/Tickets'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Home() {
+const navigation = useNavigation();
+
  return (
    <View style={styles.container}>
       <View style={styles.header}>
         <Image
-        source={require('../../assets/banner.png')}
+        source={require('../../assets/bannerSmall.png')}
         style={styles.image}
         />
 
@@ -24,19 +27,42 @@ export default function Home() {
               />
           </TouchableOpacity>
         </View>
+    </View>
         <View style={styles.line} />
-
+       
         <ScrollView>
-        <Text style={styles.text}>Ingressos</Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets/>
-          <Tickets/>
+        <Text style={styles.textIngresso}>Ingressos</Text>
 
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <Tickets img={require('../../assets/1.png')} cost='Grátis' onClick={() => navigation.navigate('Detail')}>
+            Evento PUC Campinas
+          </Tickets>
+          <Tickets img={require('../../assets/2.png')} cost='R$ 110,00'onClick={() => navigation.navigate('Detail')}>
+            Evento PUC Campinas
+          </Tickets>
         </View>
-          
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <Tickets img={require('../../assets/3.png')} cost='R$220,00'onClick={() => alert('Clicou')}>
+            Evento PUC Campinas
+          </Tickets>
+          <Tickets img={require('../../assets/4.png')} cost='R$ 111,00'onClick={() => alert('Clicou')}>
+            Evento PUC Campinas
+          </Tickets>
+        </View>
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <Tickets img={require('../../assets/5.png')} cost='R$222,00'onClick={() => alert('Clicou')}>
+            Evento PUC Campinas
+          </Tickets>
+          <Tickets img={require('../../assets/6.png')} cost='R$ 300,00'onClick={() => alert('Clicou')}>
+            Evento PUC Campinas
+          </Tickets>
+        </View>  
+
         </ScrollView>
+        
       </View>
-   </View>
   );
 }
 
@@ -50,8 +76,8 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   image:{
-    width:'100%',
-    height: '35%'
+    width:'100%'
+    
   },
   textContainer:{
     flexDirection: 'row',
@@ -66,5 +92,10 @@ const styles = StyleSheet.create({
   line:{
     borderBottomColor: '#D8d8d8',
     borderBottomWidth: 2,
+  },
+  textIngresso:{
+    fontFamily: 'Anton_400Regular',
+    fontSize: 26,
+    marginHorizontal: '4%'
   }
 });
