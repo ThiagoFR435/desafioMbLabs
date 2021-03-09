@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet,} from 'rea
 import Button from '../../component/Button';
 import Footer from '../../component/Footer';
 
+
 export default function Detail({navigation}) {
 
   navigation.setOptions({

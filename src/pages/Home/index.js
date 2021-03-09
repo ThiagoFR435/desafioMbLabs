@@ -20,7 +20,7 @@ const navigation = useNavigation();
           <Text style={styles.text}>-</Text>
           <Text style={styles.text}>Universidades</Text>
           <TouchableOpacity style={{position:'absolute', right: 0, alignSelf: 'center'}}>
-              <MaterialIcons
+              <MaterialIcons 
                 name='filter-list'
                 size={24}
                 color="#000"
@@ -34,7 +34,7 @@ const navigation = useNavigation();
         <Text style={styles.textIngresso}>Ingressos</Text>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets img={require('../../assets/1.png')} cost='Grátis' onClick={() => navigation.navigate('Detail')}>
+          <Tickets img={require('../../assets/1.png')} cost='Grátiss' onClick={() => navigation.navigate('Login')}>
             Evento PUC Campinas
           </Tickets>
           <Tickets img={require('../../assets/2.png')} cost='R$ 110,00'onClick={() => navigation.navigate('Detail')}>
