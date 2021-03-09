@@ -3,6 +3,7 @@ import { View, Text, StyleSheet , ScrollView, Image, TouchableOpacity} from 'rea
 import { MaterialIcons } from '@expo/vector-icons'
 import Tickets from '../../component/Tickets'
 import { useNavigation } from '@react-navigation/native'
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function Home() {
 const navigation = useNavigation();
@@ -16,15 +17,14 @@ const navigation = useNavigation();
         />
 
         <View style={styles.textContainer}>
-          <Text style={styles.text}>Empresas</Text>
-          <Text style={styles.text}>-</Text>
-          <Text style={styles.text}>Universidades</Text>
+          <Text style={styles.text}>Eventos</Text>
           <TouchableOpacity style={{position:'absolute', right: 0, alignSelf: 'center'}}>
-              <MaterialIcons 
-                name='filter-list'
-                size={24}
-                color="#000"
-              />
+          <FontAwesome
+           name="user-circle-o" 
+           size={24} 
+           color="black" 
+           onPress={() => navigation.navigate('Profile')}
+           />
           </TouchableOpacity>
         </View>
     </View>
