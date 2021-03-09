@@ -18,8 +18,8 @@ function Routes(){
     
     return(
         <NavigationContainer>
-           
-            <Stack.Navigator>
+            
+            <Stack.Navigator initialRouteName="Login">
                 <Stack.Screen
                     name ="Home"
                     component={Home}

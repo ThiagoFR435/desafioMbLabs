@@ -1,11 +1,46 @@
 import { disableExpoCliLogging } from 'expo/build/logs/Logs';
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, View, Text, KeyboardAvoidingView, Image, TouchableOpacity, TextInput, Platform} from 'react-native';
+import { set } from 'react-native-reanimated';
 //import { TextInput } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native'
 
 export default function Login() {
  
   const[display, setDisplay]=useState('none');
+  const[user, setUser]=useState(null);
+  const[password, setPassword]=useState(null);
+  const[login, setLogin]=useState(null);
+  const navigation = useNavigation();
+
+  //Envio form login
+  async function sendForm(){
+    let response=await fetch('http://192.168.0.11:3000/login',{
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: user,
+          password: password
+        })
+    });
+
+    let json=await response.json();
+    console.log(json);
+    if(json === 'errorSenha'){
+      setDisplay('flex');
+      setTimeout(()=>{
+        setDisplay('none');
+      },4000);
+
+    }else{
+      navigation.navigate('Home');
+    }
+
+  }
+
  return (
    <KeyboardAvoidingView style={styles.container}>
         <View style={styles.container}>
@@ -18,12 +53,18 @@ export default function Login() {
             <TextInput 
               placeholder='Usuário:'
               style={styles.loginInput} 
+              onChangeText={text=>setUser(text)}
             />
-            <TextInput style={styles.loginInput} placeholder='Senha:' secureTextEntry={true} />
+            <TextInput 
+              style={styles.loginInput} 
+              placeholder='Senha:' 
+              secureTextEntry={true} 
+              onChangeText={text=>setPassword(text)}
+            />
 
             <TouchableOpacity 
               style={styles.loginButton}
-              onPress={() => setDisplay('flex')}
+              onPress={() => sendForm()}
             >
               <Text style={styles.loginButtonText}>Entrar</Text>
             </TouchableOpacity>

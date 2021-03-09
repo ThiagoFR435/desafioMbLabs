@@ -3,51 +3,26 @@ const cors=require('cors');
 const bodyParser= require('body-parser');
 const models=require('./models');
 const { response } = require('express');
+const { useReducer } = require('react');
 
 const app=express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 
 let usuario=models.Usuario;
 let pedido=models.Pedido;
 let evento=models.Evento;
 
-app.get('/create', async(req,res)=>{
-    let create=await usuario.create({ 
-        
-        nome: "Thiago", 
-        sobrenome: "Ferreira",
-        email:"thiagoferreira@gmail.com",
-        senha:'123',
-        createAt: new Date(),
-        updateAt: new Date()
+app.post('/login',async(req,res)=>{
+    let response=await usuario.findOne({
+        where:{nome:req.body.name, senha: req.body.password}
     });
-
-    res.send('Usuário criado com SUCESSO');
-})
-
-app.get('/read',async(req,res)=>{
-    let read=await usuario.findAll({
-        raw:true
-    });
-    console.log(read);
-});
-
-app.get('/update',async(req,res)=>{
-    let update=await usuario.findByPk(1).then((response)=>{
-        response.nome='Gilmaaar';
-        response.sobrenome='Furtadoooo';
-        response.email='testeeeee@gmail.com';
-        response.senha='updateeee';
-
-        response.save();
-    });
-});
-
-app.get('/delete',async(req,res)=>{
-    usuario.destroy({
-        where: {id:2}
-    });
+    if(response === null){
+        res.send(JSON.stringify('errorSenha'))
+    }else{
+        res.send(response);
+    }  
 });
 
 
