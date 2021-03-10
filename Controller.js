@@ -89,6 +89,63 @@ app.get('/pedido',async(req,res)=>{
     console.log(pedidos);
 });
 
+app.post('/pedido/:idUsuario',async(req,res)=>{
+    
+    const {idEvento,valor,confirmacaopg} = req.body;
+    const{idUsuario} = req.params;
+    
+    console.log(idEvento);
+    console.log(idUsuario);
+    console.log(valor);
+    console.log(confirmacaopg);
+
+    await pedido.create({
+        idEvento: idEvento,
+        idUsuario: idUsuario,
+        valor: valor,
+        confirmacaopg: confirmacaopg,
+        createAt: new Date(),
+        updateAt: new Date()
+    })
+
+
+    res.status(201).send();
+});
+
+app.put('/pedido/:id',async(req,res)=>{
+    
+    const{id} = req.params;
+    const {idEvento,idUsuario,valor,confirmacaopg} = req.body;
+   
+    await pedido.update({ 
+        idEvento: idEvento,
+        idUsuario: idUsuario,
+        valor: valor,
+        confirmacaopg: confirmacaopg,
+        createAt: new Date(),
+        updateAt: new Date()
+     }, {
+        where: {
+          id: id
+        }
+      });
+    
+    res.status(200).send();
+});
+
+app.delete('/pedido/:id',async(req,res)=>{
+    
+    const {id} = req.params;
+
+    await pedido.destroy({
+        where: {
+          id: id
+        }
+      });
+    
+    res.status(200).send();
+});
+
 
 
 

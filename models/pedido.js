@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     idEvento: DataTypes.INTEGER,
     idUsuario: DataTypes.INTEGER,
     confirmacaopg: DataTypes.STRING,
+    valor: DataTypes.INTEGER,
     data: DataTypes.STRING
   }, {
     sequelize,
