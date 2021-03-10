@@ -23,7 +23,74 @@ app.post('/login',async(req,res)=>{
     }else{
         res.send(response);
     }  
+
 });
+
+app.get('/evento',async(req,res)=>{
+    
+    const  eventos = await evento.findAll();
+    res.status(200).json(eventos);
+    console.log(eventos);
+});
+
+app.post('/evento',async(req,res)=>{
+    
+    const {titulo,desc,tipo,foto} = req.body;
+   
+    await evento.create({
+        titulo: titulo,
+        desc: desc,
+        tipo: tipo,
+        foto: foto,
+        createAt: new Date(),
+        updateAt: new Date()
+    })
+    res.status(201).send();
+});
+
+app.put('/evento/:id',async(req,res)=>{
+    
+    const {id} = req.params;
+    const {titulo,desc,tipo,foto} = req.body;
+   
+    await evento.update({ 
+        titulo: titulo,
+        desc: desc,
+        tipo: tipo,
+        foto: foto,
+        createAt: new Date(),
+        updateAt: new Date()
+     }, {
+        where: {
+          id: id
+        }
+      });
+    
+    res.status(200).send();
+});
+
+app.delete('/evento/:id',async(req,res)=>{
+    
+    const {id} = req.params;
+
+    await evento.destroy({
+        where: {
+          id: id
+        }
+      });
+    
+    res.status(200).send();
+});
+
+app.get('/pedido',async(req,res)=>{
+    
+    const  pedidos = await pedido.findAll();
+    res.status(200).json(pedidos);
+    console.log(pedidos);
+});
+
+
+
 
 
 let port=process.env.PORT || 3000;
