@@ -1,14 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet , ScrollView, Image, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet , ScrollView, Image, TouchableOpacity, FlatList} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 import Tickets from '../../component/Tickets'
 import { useNavigation } from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons';
-import { useEffect } from 'react/cjs/react.production.min';
+import { useEffect, useState } from 'react/cjs/react.production.min';
 console.disableYellowBox = true;
 
+
 export default function Home() {
-const navigation = useNavigation();
+    
+  const navigation = useNavigation();
+  
 
  return (
    <View style={styles.container}>

@@ -50,7 +50,7 @@ app.get('/evento',async(req,res)=>{
     
     const  eventos = await evento.findAll();
     res.status(200).json(eventos);
-    console.log(eventos);
+    //console.log(eventos);
 });
 
 //Cria Eventos
