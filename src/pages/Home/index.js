@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import Tickets from '../../component/Tickets'
 import { useNavigation } from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons';
+import { useEffect } from 'react/cjs/react.production.min';
 
 export default function Home() {
 const navigation = useNavigation();
@@ -23,7 +24,7 @@ const navigation = useNavigation();
            name="user-circle-o" 
            size={24} 
            color="black" 
-           onPress={() => navigation.navigate('Profile')}
+           onPress={() => navigation.navigate('Areauser')}
            />
           </TouchableOpacity>
         </View>

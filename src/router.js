@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native'
 import Home from './pages/Home/';
 import Detail from './pages/Detail/';
 import Login from './pages/Login/';
-import Profile from './pages/Profile/';
+import Areauser from './pages/Areauser';
 import Cart from './pages/Cart/';
 
 const Stack = createStackNavigator();
@@ -48,8 +48,8 @@ function Routes(){
                     options={{headerShown: false}}
                 />
                 <Stack.Screen
-                    name="Profile"
-                    component={Profile}
+                    name="Areauser"
+                    component={Areauser}
                     options={{headerShown: true}}
                 />
                 <Stack.Screen

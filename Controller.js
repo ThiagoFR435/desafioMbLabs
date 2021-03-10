@@ -14,6 +14,7 @@ let usuario=models.Usuario;
 let pedido=models.Pedido;
 let evento=models.Evento;
 
+//Login
 app.post('/login',async(req,res)=>{
     let response=await usuario.findOne({
         where:{nome:req.body.name, senha: req.body.password}
@@ -26,6 +27,9 @@ app.post('/login',async(req,res)=>{
 
 });
 
+//-------------Gerenciamento de Evento------------------
+
+//Busca eventos
 app.get('/evento',async(req,res)=>{
     
     const  eventos = await evento.findAll();
@@ -33,6 +37,7 @@ app.get('/evento',async(req,res)=>{
     console.log(eventos);
 });
 
+//Cria Eventos
 app.post('/evento',async(req,res)=>{
     
     const {titulo,desc,tipo,foto} = req.body;
@@ -48,6 +53,7 @@ app.post('/evento',async(req,res)=>{
     res.status(201).send();
 });
 
+//Edita Eventos
 app.put('/evento/:id',async(req,res)=>{
     
     const {id} = req.params;
@@ -69,6 +75,7 @@ app.put('/evento/:id',async(req,res)=>{
     res.status(200).send();
 });
 
+//Apaga Eventos
 app.delete('/evento/:id',async(req,res)=>{
     
     const {id} = req.params;
@@ -81,7 +88,9 @@ app.delete('/evento/:id',async(req,res)=>{
     
     res.status(200).send();
 });
+//-------------Gerenciamento de Pedido------------------
 
+//Busca pedidos
 app.get('/pedido',async(req,res)=>{
     
     const  pedidos = await pedido.findAll();
@@ -89,6 +98,7 @@ app.get('/pedido',async(req,res)=>{
     console.log(pedidos);
 });
 
+//Cria Pedido
 app.post('/pedido/:idUsuario',async(req,res)=>{
     
     const {idEvento,valor,confirmacaopg} = req.body;
@@ -112,6 +122,7 @@ app.post('/pedido/:idUsuario',async(req,res)=>{
     res.status(201).send();
 });
 
+//Edita pedido
 app.put('/pedido/:id',async(req,res)=>{
     
     const{id} = req.params;
@@ -133,6 +144,7 @@ app.put('/pedido/:id',async(req,res)=>{
     res.status(200).send();
 });
 
+//Apaga Pedido
 app.delete('/pedido/:id',async(req,res)=>{
     
     const {id} = req.params;
@@ -146,10 +158,88 @@ app.delete('/pedido/:id',async(req,res)=>{
     res.status(200).send();
 });
 
+//------------------Gerenciamento de Usuario----------------
+
+//Busca Todos usuarios do banco
+app.get('/usuario/',async(req,res)=>{
+    
+    const  usuarios = await usuario.findAll();
+    res.status(200).json(usuarios);
+    console.log(usuarios);
+
+});
+
+//Busca Um usuario por ID
+app.get('/usuario/:id',async(req,res)=>{
+    
+    const {id} = req.params;
+
+    const user = await usuario.findAll({
+        where: {
+          id: id
+        }
+      });
+    
+    res.status(200).send(user);
+});
+
+//Cria um usuario
+
+app.post('/usuario',async(req,res)=>{
+    
+    const {nome,sobrenome,email,senha} = req.body;
+   
+    await usuario.create({
+        nome: nome,
+        sobrenome: sobrenome,
+        email: email,
+        senha: senha,
+        createAt: new Date(),
+        updateAt: new Date()
+    })
+    res.status(201).send();
+});
+
+//Edita um usuario
+app.put('/usuario/:id',async(req,res)=>{
+    
+    const{id} = req.params;
+    const {nome,sobrenome,email,senha} = req.body;
+   
+    await usuario.update({ 
+        nome: nome,
+        sobrenome: sobrenome,
+        email: email,
+        senha: senha,
+        createAt: new Date(),
+        updateAt: new Date()
+     }, {
+        where: {
+          id: id
+        }
+      });
+    
+    res.status(200).send();
+});
+
+//Apaga um usuario
+
+app.delete('/usuario/:id',async(req,res)=>{
+    
+    const {id} = req.params;
+
+    await usuario.destroy({
+        where: {
+          id: id
+        }
+      });
+    
+    res.status(200).send();
+});
 
 
 
-
+//Porta 
 let port=process.env.PORT || 3000;
 
 app.listen(port,(req,res)=>{

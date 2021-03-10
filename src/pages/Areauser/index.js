@@ -3,10 +3,12 @@ import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet,} from 'rea
 import AsyncStorage from '@react-native-community/async-storage';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-export default function Profile({navigation}) {
+export default function Areauser({navigation}) {
 
   const [user,setUser] = useState(null);
+  const Tab = createMaterialBottomTabNavigator();
 
   useEffect(()=>{
     async function getUser(){
@@ -18,37 +20,14 @@ export default function Profile({navigation}) {
   },[]);
 
   navigation.setOptions({
-    headerTitle: 'Pedidos'
+    headerTitle: 'Área do Usuário'
   })
 
  return (
-   <ScrollView style={styles.container}>
-  
-   <View style={styles.container}>
-      <View>
-        <Text style={[styles.title, {fontSize: 30}]}>Bem Vindo {user}</Text>
-      </View>
-      <View opacity={0.6}>
-        <Text style={[styles.title, {fontSize: 25} ]}>Seus Pedidos </Text>
-      </View>
-
-      <View style={styles.textContent}>
-        <Text style={styles.textTitle}>
-            Pedido 1 -
-        </Text>
-        <Text style={styles.textTitle} >
-          Pedido 2 -
-        </Text >
-        <Text style={styles.textTitle}>
-          Pedido 3 -
-        </Text>
-        <Text style={styles.textTitle}>
-          Pedido 4 -
-        </Text>
-      </View>
-
-   </View>
-   </ScrollView>
+      <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
   );
 }
 
