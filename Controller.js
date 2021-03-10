@@ -2,8 +2,6 @@ const express=require('express');
 const cors=require('cors');
 const bodyParser= require('body-parser');
 const models=require('./models');
-const { response } = require('express');
-const { useReducer } = require('react');
 
 const app=express();
 app.use(cors());
@@ -25,6 +23,24 @@ app.post('/login',async(req,res)=>{
         res.send(response);
     }  
 
+});
+
+//Alterar senha
+app.post('/verificaSenha',async (req,res)=>{
+  let response= await usuario.findOne({
+    where:{id:req.body.id, senha:req.body.senhaAntiga}
+  });
+  if(response === null){
+      res.send(JSON.stringify('Senha Antiga nao confere'));
+  }else{
+      if(req.body.novaSenha === req.body.confNovaSenha){
+        response.senha = req.body.novaSenha;
+        response.save();
+        res.send(JSON.stringify('Senha Alterada'));
+      }else{
+        res.send(JSON.stringify('Senhas nao conferem'));
+      }
+  }  
 });
 
 //-------------Gerenciamento de Evento------------------

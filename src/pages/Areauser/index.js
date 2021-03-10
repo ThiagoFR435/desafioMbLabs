@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet,} from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import Icon from '../../../node_modules/react-native-vector-icons/dist/FontAwesome';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Perfil from './Perfil';
+import Pedidos from './Pedidos';
 
 export default function Areauser({navigation}) {
 
@@ -24,9 +27,29 @@ export default function Areauser({navigation}) {
   })
 
  return (
-      <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Navigator
+        activeColor='#999'
+        inactiveColor='#fff'
+        barStyle={styles.areaTab}
+      >
+      <Tab.Screen 
+        name="Perfil" 
+        component={Perfil}
+        options={{
+          tabBarIcon: ()=>(
+            <Icon name="user" size={20} color="#FFF"/>
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Pedidos" 
+        component={Pedidos}
+        options={{
+          tabBarIcon: ()=>(
+            <Icon name="ticket" size={20} color="#FFF"/>
+          )
+        }}
+      />
       </Tab.Navigator>
   );
 }
@@ -36,6 +59,12 @@ const styles = StyleSheet.create({
     flex:1,
     width: '100%',
     backgroundColor: '#FFF'
+  },
+  areaTab:{
+    backgroundColor:'#333',
+    fontSize:20,
+    fontWeight:'bold',
+    color:'#333'
   },
   image:{
     width: '100%'
