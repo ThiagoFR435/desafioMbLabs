@@ -4,14 +4,56 @@ import { StyleSheet, View, Text, KeyboardAvoidingView, Image, TouchableOpacity, 
 import { set } from 'react-native-reanimated';
 //import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-community/async-storage';
+import * as LocalAuthentication from 'expo-local-authentication';
 
 export default function Login() {
  
   const[display, setDisplay]=useState('none');
   const[user, setUser]=useState(null);
   const[password, setPassword]=useState(null);
-  const[login, setLogin]=useState(null);
+  const[login, setLogin]=useState(false);
   const navigation = useNavigation();
+
+  useEffect(()=>{
+      verifyLogin();
+  },[]);
+
+  useEffect(()=>{
+    if(login===true){
+      biometric();
+    }
+  },[login]);
+
+  //Verifica se o usuario esta logado
+  async function verifyLogin(){
+    let response=await AsyncStorage.getItem('userData');
+    let json=await JSON.parse(response);
+    if(json != null){
+      setUser(json.nome);
+      setPassword(json.senha);
+      setLogin(true);
+    }
+  }
+
+  //Biometria
+  async function biometric(){
+    let compatible= await LocalAuthentication.hasHardwareAsync();
+    if(compatible){
+      let biometricRecords = await LocalAuthentication.isEnrolledAsync();
+      if (!biometricRecords){
+        alert('Voce nao possui biometria');
+      }else{
+        let result = await LocalAuthentication.authenticateAsync();
+        if(result.success){
+          sendForm();
+        }else{
+          setUser(null);
+          setPassword(null);
+        }
+      }
+    }
+  }
 
   //Envio form login
   async function sendForm(){
@@ -34,8 +76,10 @@ export default function Login() {
       setTimeout(()=>{
         setDisplay('none');
       },4000);
+      await AsyncStorage.clear();
 
     }else{
+      await AsyncStorage.setItem('userData', JSON.stringify(json));
       navigation.navigate('Home');
     }
 

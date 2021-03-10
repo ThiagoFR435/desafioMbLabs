@@ -1,7 +1,21 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet,} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Profile({navigation}) {
+
+  const [user,setUser] = useState(null);
+
+  useEffect(()=>{
+    async function getUser(){
+      let response=await AsyncStorage.getItem('userData');
+      let json=JSON.parse(response);
+      setUser(json.nome);
+    }
+    getUser();
+  },[]);
 
   navigation.setOptions({
     headerTitle: 'Pedidos'
@@ -12,10 +26,10 @@ export default function Profile({navigation}) {
   
    <View style={styles.container}>
       <View>
-        <Text style={[styles.title, {fontSize: 30}]}>Bem Vindo Thiago</Text>
+        <Text style={[styles.title, {fontSize: 30}]}>Bem Vindo {user}</Text>
       </View>
       <View opacity={0.6}>
-        <Text style={[styles.title, {fontSize: 25} ]}>Seus Pedidos</Text>
+        <Text style={[styles.title, {fontSize: 25} ]}>Seus Pedidos </Text>
       </View>
 
       <View style={styles.textContent}>
