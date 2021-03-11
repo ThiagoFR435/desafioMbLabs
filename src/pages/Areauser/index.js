@@ -61,10 +61,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
   areaTab:{
-    backgroundColor:'#333',
+    backgroundColor:'#000',
     fontSize:20,
     fontWeight:'bold',
-    color:'#333'
+    color:'#000'
   },
   image:{
     width: '100%'

@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Assets } from '@react-navigation/stack';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {View, Text, TouchableOpacity,TextInput, StyleSheet, FlatList} from 'react-native';
+import {View, Text, TouchableOpacity,TextInput, StyleSheet, FlatList, ScrollView} from 'react-native';
 import { set } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MenuArea from '../../../component/MenuArea';
@@ -17,6 +17,7 @@ export default function Pedido({navigation}) {
   const [creatAt, setCreateAt ] = useState(null);
   const [titulo, setTitulo] = useState(null);
   const [pedidos, setPedidos] = useState(null);
+  const [eventos, setEventos] = useState(null);
 
   useEffect(()=>{
       async function getIdUser(){
@@ -44,6 +45,7 @@ export default function Pedido({navigation}) {
      const idEvento = result2[0].idEvento
       let result3=await api.get(`/evento/${idEvento}`).then((response) =>{
       //console.log(response.data);
+      setEventos=(response.data);
       return response.data;
   });
   
@@ -61,14 +63,17 @@ export default function Pedido({navigation}) {
 
  return (
     <View style={styles.container}>
-      <MenuArea title='Pedido' navigation={navigation}/>
-      <View>
+      <MenuArea title='Pedidos' navigation={navigation}/>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
         <FlatList
           data={pedidos}
           keyExtractor={(pedidos) => Pedido.id}
           renderItem={PedidoShow}
         />
-      </View>
+      </ScrollView>
       <View>
         <Text></Text>
        
@@ -82,12 +87,18 @@ function PedidoShow(item)
 {
   const {id, idEvento, confirmacaopg, valor, createdAt} = item.item
   return(
+
+    
     <View>
+      
+
       <Text>ID: {id}</Text>
       <Text>Evento: {idEvento}</Text>
       <Text>Status: {confirmacaopg}</Text>
       <Text>Valor: R${valor}</Text>
       <Text>Data: {createdAt}</Text>
+      <Text></Text>
+
     </View>
     
   )
