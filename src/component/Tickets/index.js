@@ -1,15 +1,10 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 export default function Tickets(props) {
     
-   /* function filterDesc(desc){
-        if(desc.length < 27){
-            return desc;
-        }
-
-        return `${desc.substring(0,22)}...`;
-    }*/
+    
 
  return (
    <TouchableOpacity style={styles.container} onPress={props.onClick}>
@@ -21,7 +16,7 @@ export default function Tickets(props) {
             <Text style={styles.ticketText}>{props.text}</Text>
        </View>
        <View opacity={0.65}>
-           <Text style={styles.ticketText}>R$ {props.cost}</Text>
+           <Text style={styles.ticketText}>R${props.cost}</Text>
        </View>
    </TouchableOpacity>
   );

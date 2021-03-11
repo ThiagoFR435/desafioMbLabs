@@ -1,21 +1,25 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet,} from 'react-native';
-import Button from '../../component/Button';
+import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet, Button} from 'react-native';
+
 import Footer from '../../component/Footer';
 import api from '../../services/api.js';
+import { useNavigation } from '@react-navigation/native'
 
 
-export default function Detail({navigation}) {
+export default function Detail({route, navigation}) {
+
+  
 
   navigation.setOptions({
     headerTitle: 'Pagina de Detalhes'
   })
 
   const [evento, setEvento] = React.useState([]);
+  const { itemId } = route.params;
   
 
   React.useEffect(() =>{
-    api.get("/evento/11").then((response) =>{
+    api.get(`/evento/${itemId}`).then((response) =>{
       //console.log(response.data);
       setEvento(response.data[0]);
       //console.log(evento);
@@ -36,6 +40,8 @@ export default function Detail({navigation}) {
   <Text>Desc: {evento.desc}</Text>
   <Text>Tipo: {evento.tipo}</Text>
   <Text>Valor: {evento.valor}</Text>
+
+  <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
 
    </ScrollView>
   );

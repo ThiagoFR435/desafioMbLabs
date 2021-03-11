@@ -23,9 +23,7 @@ export default function Home() {
   });
   }, []);
   
-
  return (
-
 
    <View style={styles.container}>
       <View style={styles.header}>
@@ -41,21 +39,31 @@ export default function Home() {
            size={24} 
            color="black" 
            //mudar para Areauser
-           onPress={() => navigation.navigate('Detail')}
+           onPress={() => navigation.navigate('Detail',{itemId: 10})}
            />
           </TouchableOpacity>
         </View>
     </View>
         <View style={styles.line} />
-       
-
         <ScrollView>
         
         <FlatList
           numColumns={2}
           data={eventos}
           keyExtractor={(eventos) => eventos.id}
-          renderItem={EventosShow}
+          renderItem={({ item })=>(
+              <View style={styles.item}>
+                <View style={styles.item2}>
+                  <Image style={{width:175, height:175}}source={{ uri: item.foto}}/>
+                  <Text style={styles.ticketText}>
+                    {item.titulo}
+                  </Text>
+                  <Text style={styles.valorText}>
+                    R${item.valor}
+                  </Text>
+                </View>
+              </View>
+          )}
         />
         </ScrollView>
         
@@ -63,22 +71,7 @@ export default function Home() {
   );
 }
 
-function EventosShow(item)
-{
-  const {id, titulo, desc, tipo, foto, valor} = item.item
 
-  //console.log(foto);
-  //console.log(typeof(foto));
-  return(
-
-    <View style={styles.item} >
-      
-      <Tickets img={{ uri: foto}} text = {titulo} cost= {valor} onClick={() => pressHandler(id)}></Tickets>
-
-    </View>
-    
-  )
-}
 
 const pressHandler = (id) =>{
   console.log(id)
@@ -122,5 +115,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginTop: 10,
     alignSelf: 'center'
-  }
+  },
+  item2:{
+    paddingVertical: '2%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  ticketText:{
+       
+    fontSize: 16
+},
+valorText:{
+       
+  opacity: 0.5,
+}
 });
