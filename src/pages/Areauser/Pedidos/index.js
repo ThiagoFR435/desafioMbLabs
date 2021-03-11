@@ -12,9 +12,10 @@ import api from '../../../services/api.js';
 export default function Pedido({navigation}) {
 
   const [idUser, setIdUser ] = useState(null);
-  const [nome, setNome ] = useState(null);
-  const [sobrenome, setSobrenome ] = useState(null);
-  const [email, setEmail ] = useState(null);
+  const [confirmacaopg, setConfirmacaoPg ] = useState(null);
+  const [valor, setValor ] = useState(null);
+  const [creatAt, setCreateAt ] = useState(null);
+  const [titulo, setTitulo] = useState(null);
 
   useEffect(()=>{
       async function getIdUser(){
@@ -27,19 +28,29 @@ export default function Pedido({navigation}) {
       getIdUser();
       async function getDados(){
         const id = await getIdUser();
-        console.log("Resultado" , id);
+        //console.log("Resultado" , id);
         let result=await api.get(`/usuario/${id}`).then((response) =>{
           //console.log(response.data);
           return response.data;
           //setInfos(response.data);
       });
-    //console.log(result[0]);
+        let result2=await api.get(`/pedido/${id}`).then((response) =>{
+        //console.log(response.data);
+        return response.data;
+        //setInfos(response.data);
+    });
+     const idEvento = result2[0].idEvento
+      let result3=await api.get(`/evento/${idEvento}`).then((response) =>{
+      //console.log(response.data);
+      return response.data;
+      //setInfos(response.data);
+  });
+    //console.log(result3[0].titulo);
     
-    setNome(result[0].nome);
-    setSobrenome(result[0].sobrenome);
-    setEmail(result[0].email);
-
-
+    setConfirmacaoPg(result2[0].confirmacaopg);
+    setValor(result2[0].valor);
+    setCreateAt(result2[0].createdAt);
+    setTitulo(result3[0].titulo);
   }
     getDados();
       
@@ -52,12 +63,14 @@ export default function Pedido({navigation}) {
     <View style={styles.container}>
       <MenuArea title='Pedido' navigation={navigation}/>
       <View>
-        <Text>{nome}</Text>
-        <Text>{sobrenome}</Text>
-        <Text>{email}</Text>
+        <Text>Pedidos</Text>
+        <Text>{titulo}</Text>
+        <Text>{valor}</Text>
+        <Text>{confirmacaopg}</Text>
+        <Text>{creatAt}</Text>
       </View>
       <View>
-        <Text>{idUser}</Text>
+        <Text></Text>
        
       </View>
 
