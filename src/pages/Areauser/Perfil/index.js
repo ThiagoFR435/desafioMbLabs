@@ -27,7 +27,7 @@ export default function Perfil({navigation}) {
       getIdUser();
       async function getDados(){
         const id = await getIdUser();
-        console.log("Resultado" , id);
+        //console.log("Resultado" , id);
         let result=await api.get(`/usuario/${id}`).then((response) =>{
           //console.log(response.data);
           return response.data;
