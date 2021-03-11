@@ -51,6 +51,7 @@ export default function Home() {
         <ScrollView>
         
         <FlatList
+          numColumns={2}
           data={eventos}
           keyExtractor={(eventos) => eventos.id}
           renderItem={EventosShow}
@@ -69,7 +70,7 @@ function EventosShow(item)
   console.log(typeof(foto));
   return(
 
-    <View>
+    <View style={styles.item} >
       
       <Tickets img={{ uri: foto}} text = {titulo} cost= {valor} onClick={() => navigation.navigate('Detail')}></Tickets>
 
@@ -109,5 +110,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Anton_400Regular',
     fontSize: 26,
     marginHorizontal: '4%'
+  },
+  item:{
+    marginHorizontal: 15,
+    marginTop: 10,
+    alignSelf: 'center'
   }
 });
