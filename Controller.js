@@ -53,6 +53,20 @@ app.get('/evento',async(req,res)=>{
     //console.log(eventos);
 });
 
+//Busca um só evento
+app.get('/evento/:id',async(req,res)=>{
+    
+  const {id} = req.params;
+
+  const eventos = await evento.findAll({
+      where: {
+        id: id
+      }
+    });
+  
+  res.status(200).send(eventos);
+});
+
 //Cria Eventos
 app.post('/evento',async(req,res)=>{
     

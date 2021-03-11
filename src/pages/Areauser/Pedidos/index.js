@@ -9,12 +9,12 @@ import MenuArea from '../../../component/MenuArea';
 import api from '../../../services/api.js';
 
 
-export default function Pedidos({navigation}) {
+export default function Pedido({navigation}) {
 
   const [idUser, setIdUser ] = useState(null);
-  const [idEvento, setIdEvento ] = useState(null);
-  const [confirmacaopg, setConfirmacaopg ] = useState(null);
-  const [createdAt, setCreatedAt ] = useState(null);
+  const [nome, setNome ] = useState(null);
+  const [sobrenome, setSobrenome ] = useState(null);
+  const [email, setEmail ] = useState(null);
 
   useEffect(()=>{
       async function getIdUser(){
@@ -28,16 +28,16 @@ export default function Pedidos({navigation}) {
       async function getDados(){
         const id = await getIdUser();
         console.log("Resultado" , id);
-        let result=await api.get(`/pedido/${id}`).then((response) =>{
+        let result=await api.get(`/usuario/${id}`).then((response) =>{
           //console.log(response.data);
           return response.data;
           //setInfos(response.data);
       });
     //console.log(result[0]);
     
-    setIdEvento(result[0].nome);
-    setConfirmacaopg(result[0].sobrenome);
-    setCreatedAt(result[0].email);
+    setNome(result[0].nome);
+    setSobrenome(result[0].sobrenome);
+    setEmail(result[0].email);
 
 
   }
@@ -50,9 +50,9 @@ export default function Pedidos({navigation}) {
 
  return (
     <View style={styles.container}>
-      <MenuArea title='Pedidos' navigation={navigation}/>
+      <MenuArea title='Pedido' navigation={navigation}/>
       <View>
-        <Text>Tela Pedido {nome}</Text>
+        <Text>{nome}</Text>
         <Text>{sobrenome}</Text>
         <Text>{email}</Text>
       </View>
