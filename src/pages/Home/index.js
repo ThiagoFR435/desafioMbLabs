@@ -23,7 +23,7 @@ export default function Home() {
   });
   }, []);
   
-  
+
  return (
 
 
@@ -40,7 +40,8 @@ export default function Home() {
            name="user-circle-o" 
            size={24} 
            color="black" 
-           onPress={() => navigation.navigate('Areauser')}
+           //mudar para Areauser
+           onPress={() => navigation.navigate('Detail')}
            />
           </TouchableOpacity>
         </View>
@@ -66,18 +67,24 @@ function EventosShow(item)
 {
   const {id, titulo, desc, tipo, foto, valor} = item.item
 
-  console.log(foto);
-  console.log(typeof(foto));
+  //console.log(foto);
+  //console.log(typeof(foto));
   return(
 
     <View style={styles.item} >
       
-      <Tickets img={{ uri: foto}} text = {titulo} cost= {valor} onClick={() => navigation.navigate('Detail')}></Tickets>
+      <Tickets img={{ uri: foto}} text = {titulo} cost= {valor} onClick={() => pressHandler(id)}></Tickets>
 
     </View>
     
   )
 }
+
+const pressHandler = (id) =>{
+  console.log(id)
+  return id;
+}
+
 
 const styles = StyleSheet.create({
   container:{

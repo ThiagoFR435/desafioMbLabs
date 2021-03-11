@@ -2,13 +2,25 @@ import React from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet,} from 'react-native';
 import Button from '../../component/Button';
 import Footer from '../../component/Footer';
+import api from '../../services/api.js';
 
 
 export default function Detail({navigation}) {
 
   navigation.setOptions({
-    headerTitle: 'Evento Puc'
+    headerTitle: 'Pagina de Detalhes'
   })
+
+  const [evento, setEvento] = React.useState([]);
+  
+
+  React.useEffect(() =>{
+    api.get("/evento/11").then((response) =>{
+      //console.log(response.data);
+      setEvento(response.data[0]);
+      //console.log(evento);
+  });
+  }, []);
 
  return (
    <ScrollView style={styles.container}>
@@ -17,37 +29,14 @@ export default function Detail({navigation}) {
     style={styles.image}
     resizeMode="cover"
    />
+  
+  <Text>Id Evento: {evento.id} </Text>
+  <Text>URL Foto: {evento.foto} </Text>
+  <Text>Evento: {evento.titulo}</Text>
+  <Text>Desc: {evento.desc}</Text>
+  <Text>Tipo: {evento.tipo}</Text>
+  <Text>Valor: {evento.valor}</Text>
 
-   <View>
-      <View>
-        <Text style={[styles.title, {fontSize: 24}]}>R$110,00</Text>
-      </View>
-      <View opacity={0.6}>
-        <Text style={[styles.title, {fontSize: 30} ]}>Evento PUCC</Text>
-      </View>
-
-      <View style={styles.textContent}>
-        <Text style={styles.textTitle}>
-            Evento PUCC
-        </Text>
-        <Text style={styles.textContent} >
-          Descricao do Evento
-        </Text >
-        <Text style={styles.textList}>
-          -Apresentador:
-        </Text>
-        <Text style={styles.textList}>
-          -Data e horário:
-        </Text>
-      </View>
-
-      <Button/>
-
-      <View style={styles.line}/>
-
-      <Footer/>
-
-   </View>
    </ScrollView>
   );
 }

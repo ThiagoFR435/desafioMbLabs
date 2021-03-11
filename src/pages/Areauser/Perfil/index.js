@@ -39,7 +39,6 @@ export default function Perfil({navigation}) {
     setSobrenome(result[0].sobrenome);
     setEmail(result[0].email);
 
-
   }
     getDados();
       

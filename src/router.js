@@ -32,7 +32,7 @@ function Routes(){
                         headerRight: () => (
                             <TouchableOpacity style={{marginRight: 20}}>
                                 <Feather 
-                                    name="shopping-cart"
+                                    name=""
                                     size={24}
                                     color="black"
                                 />
