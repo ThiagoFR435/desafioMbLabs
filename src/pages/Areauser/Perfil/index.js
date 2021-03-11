@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import {View, Text, TouchableOpacity,TextInput, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MenuArea from '../../../component/MenuArea';
+import api from '../../../services/api.js';
 
 
 //onChangeText={text=>setSenhaAntiga(text)}
@@ -45,12 +46,23 @@ export default function Perfil({navigation}) {
 
    let json=await response.json();
    setMsg(json);
-
   }
+
+  const [info, setInfos] = React.useState([]);
+
+  React.useEffect(() =>{
+    api.get('/usuario/1').then((response) =>{
+      console.log(response.data);
+      setInfos(response.data);
+  });
+  }, []);
 
  return (
     <View style={styles.container}>
       <MenuArea title='Perfil' navigation={navigation}/>
+      <View>
+        <Text>Teste</Text>
+      </View>
       <View>
         <Text>{msg}</Text>
         <TextInput placeholder='Senha Antiga' onChangeText={text=>setSenhaAntiga(text)}/>

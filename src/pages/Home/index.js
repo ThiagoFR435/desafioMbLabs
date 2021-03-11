@@ -5,15 +5,28 @@ import Tickets from '../../component/Tickets'
 import { useNavigation } from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons';
 import { useEffect, useState } from 'react/cjs/react.production.min';
+import api from '../../services/api.js';
 console.disableYellowBox = true;
 
 
 export default function Home() {
     
   const navigation = useNavigation();
-  
+  var rs = "R$";
 
+  const [eventos, setEventos] = React.useState([]);
+
+  React.useEffect(() =>{
+    api.get("/evento").then((response) =>{
+      //console.log(response.data);
+      setEventos(response.data);
+  });
+  }, []);
+  
+  
  return (
+
+
    <View style={styles.container}>
       <View style={styles.header}>
         <Image
@@ -21,6 +34,7 @@ export default function Home() {
         style={styles.image}
         />
 
+      
         <View style={styles.textContainer}>
           <Text style={styles.text}>Eventos</Text>
           <TouchableOpacity style={{position:'absolute', right: 0, alignSelf: 'center'}}>
@@ -36,33 +50,24 @@ export default function Home() {
         <View style={styles.line} />
        
         <ScrollView>
-        <Text style={styles.textIngresso}>Ingressos</Text>
+        
+        <Text style={styles.textIngresso}>
+          Ingressos 
+        </Text>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets img={require('../../assets/1.png')} cost='Grátis' onClick={() => navigation.navigate('Detail')}>
-            Evento PUC Campinas
-          </Tickets>
-          <Tickets img={require('../../assets/2.png')} cost='R$ 110,00'onClick={() => navigation.navigate('Detail')}>
-            Evento PUC Campinas
-          </Tickets>
+          <Tickets img={require('../../assets/1.png')} text = {eventos[0]?.titulo} cost= {eventos[0]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
+          <Tickets img={require('../../assets/2.png')} text = {eventos[1]?.titulo} cost={eventos[1]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets img={require('../../assets/3.png')} cost='R$220,00'onClick={() => alert('Clicou')}>
-            Evento PUC Campinas
-          </Tickets>
-          <Tickets img={require('../../assets/4.png')} cost='R$ 111,00'onClick={() => alert('Clicou')}>
-            Evento PUC Campinas
-          </Tickets>
+          <Tickets img={require('../../assets/1.png')} text = {eventos[2]?.titulo} cost= {eventos[2]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
+          <Tickets img={require('../../assets/2.png')} text = {eventos[3]?.titulo} cost={eventos[3]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets img={require('../../assets/5.png')} cost='R$222,00'onClick={() => alert('Clicou')}>
-            Evento PUC Campinas
-          </Tickets>
-          <Tickets img={require('../../assets/6.png')} cost='R$ 300,00'onClick={() => alert('Clicou')}>
-            Evento PUC Campinas
-          </Tickets>
+          <Tickets img={require('../../assets/1.png')} text = {eventos[3]?.titulo} cost= {eventos[4]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
+          <Tickets img={require('../../assets/2.png')} text = {eventos[4]?.titulo} cost={eventos[4]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
         </View>  
 
         </ScrollView>

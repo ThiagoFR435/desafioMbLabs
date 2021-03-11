@@ -3,13 +3,13 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 export default function Tickets(props) {
     
-    function filterDesc(desc){
+   /* function filterDesc(desc){
         if(desc.length < 27){
             return desc;
         }
 
         return `${desc.substring(0,22)}...`;
-    }
+    }*/
 
  return (
    <TouchableOpacity style={styles.container} onPress={props.onClick}>
@@ -17,17 +17,15 @@ export default function Tickets(props) {
         source={props.img}
         style={styles.ticketImg}
        />
-       <Text style={styles.ticketText}>
-       {filterDesc(props.children)} 
-       </Text>
-       <View opacity={0.65}>
-           <Text style={styles.ticketText}>{props.cost}</Text>
+       <View style={styles.ticketText}>
+            <Text style={styles.ticketText}>{props.text}</Text>
        </View>
-       
+       <View opacity={0.65}>
+           <Text style={styles.ticketText}>R$ {props.cost}</Text>
+       </View>
    </TouchableOpacity>
   );
 }
-
 
 const styles = StyleSheet.create({
     container:{

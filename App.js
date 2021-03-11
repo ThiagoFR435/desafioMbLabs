@@ -5,6 +5,7 @@ import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Anton_400Regular } from '@expo-google-fonts/anton';
 import AsyncStorage from '@react-native-community/async-storage';
+import api from '../desafioMb/src/services/api';
 
 
 import Routes from './src/router';

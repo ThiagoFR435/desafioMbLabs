@@ -56,13 +56,14 @@ app.get('/evento',async(req,res)=>{
 //Cria Eventos
 app.post('/evento',async(req,res)=>{
     
-    const {titulo,desc,tipo,foto} = req.body;
+    const {titulo,desc,tipo,foto,valor} = req.body;
    
     await evento.create({
         titulo: titulo,
         desc: desc,
         tipo: tipo,
         foto: foto,
+        valor: valor,
         createAt: new Date(),
         updateAt: new Date()
     })
@@ -73,13 +74,14 @@ app.post('/evento',async(req,res)=>{
 app.put('/evento/:id',async(req,res)=>{
     
     const {id} = req.params;
-    const {titulo,desc,tipo,foto} = req.body;
+    const {titulo,desc,tipo,foto,valor} = req.body;
    
     await evento.update({ 
         titulo: titulo,
         desc: desc,
         tipo: tipo,
         foto: foto,
+        valor: valor,
         createAt: new Date(),
         updateAt: new Date()
      }, {
