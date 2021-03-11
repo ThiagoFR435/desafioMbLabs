@@ -16,7 +16,7 @@ export default function Detail({route, navigation}) {
 
 
   navigation.setOptions({
-    headerTitle: 'Pagina de Detalhes'
+    headerTitle: 'Página de Detalhes'
   })
 
   React.useEffect(() =>{
@@ -37,6 +37,24 @@ export default function Detail({route, navigation}) {
   });
   }, []);
 
+  function enviarCompra(idEvento,idUsuario,confirmacaopg,valor) {
+
+    //console.log("Entrou",idEvento,idUsuario,confirmacaopg,valor);
+    api.post(`/pedido/${idUsuario}`, {
+      idEvento: idEvento,
+      confirmacaopg: confirmacaopg,
+      valor: valor
+    })
+    .then(function (response) {
+      //console.log(response);
+      navigation.navigate('Sucesso')
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    
+}
  return (
    
    <ScrollView style={styles.container}>
@@ -55,27 +73,6 @@ export default function Detail({route, navigation}) {
 
    </ScrollView>
   );
-}
-
-function enviarCompra(idEvento,idUsuario,confirmacaopg,valor) {
-
-   
-
-    //console.log("Entrou",idEvento,idUsuario,confirmacaopg,valor);
-    api.post(`/pedido/${idUsuario}`, {
-      idEvento: idEvento,
-      confirmacaopg: confirmacaopg,
-      valor: valor
-    })
-    .then(function (response) {
-      //console.log(response);
-      useNavigation().navigate('Sucesso');
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-    
 }
 
 const styles = StyleSheet.create({
