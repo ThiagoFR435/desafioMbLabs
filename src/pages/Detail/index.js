@@ -3,7 +3,7 @@ import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet, Button} fr
 
 import Footer from '../../component/Footer';
 import api from '../../services/api.js';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Detail({route, navigation}) {
@@ -28,20 +28,17 @@ export default function Detail({route, navigation}) {
 
  return (
    <ScrollView style={styles.container}>
-   <Image
-    source={require('../../assets/bannerSmall.png')}
-    style={styles.image}
-    resizeMode="cover"
+   <Image style={{width:175, height:175}}
+    source={{ uri: evento.foto}}
    />
   
   <Text>Id Evento: {evento.id} </Text>
-  <Text>URL Foto: {evento.foto} </Text>
   <Text>Evento: {evento.titulo}</Text>
   <Text>Desc: {evento.desc}</Text>
   <Text>Tipo: {evento.tipo}</Text>
   <Text>Valor: {evento.valor}</Text>
 
-  <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+  <Button title="Comprar" onPress={() => navigation.navigate('Sucesso')} />
 
    </ScrollView>
   );

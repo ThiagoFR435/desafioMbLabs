@@ -11,6 +11,7 @@ import Areauser from './pages/Areauser';
 import Cart from './pages/Cart/';
 import Perfil from './pages/Areauser/Perfil'
 import Pedidos from './pages/Areauser/Pedidos'
+import Sucesso from './pages/Sucesso/';
 
 const Stack = createStackNavigator();
 
@@ -66,6 +67,12 @@ function Routes(){
                     component={Pedidos}
                     options={{headerShown: true}}
                 />
+                <Stack.Screen
+                    name="Sucesso"
+                    component={Sucesso}
+                    options={{headerShown: true}}
+                />
+                
             </Stack.Navigator>
         </NavigationContainer>
     )

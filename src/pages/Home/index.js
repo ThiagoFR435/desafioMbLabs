@@ -38,8 +38,7 @@ export default function Home() {
            name="user-circle-o" 
            size={24} 
            color="black" 
-           //mudar para Areauser
-           onPress={() => navigation.navigate('Detail',{itemId: 10})}
+           onPress={() => navigation.navigate('Areauser')}
            />
           </TouchableOpacity>
         </View>
