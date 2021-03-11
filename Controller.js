@@ -25,23 +25,6 @@ app.post('/login',async(req,res)=>{
 
 });
 
-//Alterar senha
-app.post('/verificaSenha',async (req,res)=>{
-  let response= await usuario.findOne({
-    where:{id:req.body.id, senha:req.body.senhaAntiga}
-  });
-  if(response === null){
-      res.send(JSON.stringify('Senha Antiga nao confere'));
-  }else{
-      if(req.body.novaSenha === req.body.confNovaSenha){
-        response.senha = req.body.novaSenha;
-        response.save();
-        res.send(JSON.stringify('Senha Alterada'));
-      }else{
-        res.send(JSON.stringify('Senhas nao conferem'));
-      }
-  }  
-});
 
 //-------------Gerenciamento de Evento------------------
 
@@ -127,7 +110,7 @@ app.get('/pedido',async(req,res)=>{
     
     const  pedidos = await pedido.findAll();
     res.status(200).json(pedidos);
-    console.log(pedidos);
+    //console.log(pedidos);
 });
 //Busca Um só pedido
 app.get('/pedido/:id',async(req,res)=>{
@@ -149,11 +132,6 @@ app.post('/pedido/:idUsuario',async(req,res)=>{
     const {idEvento,valor,confirmacaopg} = req.body;
     const{idUsuario} = req.params;
     
-    console.log(idEvento);
-    console.log(idUsuario);
-    console.log(valor);
-    console.log(confirmacaopg);
-
     await pedido.create({
         idEvento: idEvento,
         idUsuario: idUsuario,
