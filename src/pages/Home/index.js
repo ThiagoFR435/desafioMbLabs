@@ -52,7 +52,8 @@ export default function Home() {
           data={eventos}
           keyExtractor={(eventos) => eventos.id}
           renderItem={({ item })=>(
-              <View style={styles.item}>
+            <TouchableOpacity onPress={() => navigation.navigate('Detail',{itemId: item.id})}>
+                <View style={styles.item}>
                 <View style={styles.item2}>
                   <Image style={{width:175, height:175}}source={{ uri: item.foto}}/>
                   <Text style={styles.ticketText}>
@@ -63,6 +64,7 @@ export default function Home() {
                   </Text>
                 </View>
               </View>
+            </TouchableOpacity>
           )}
         />
         </ScrollView>
@@ -72,10 +74,8 @@ export default function Home() {
 }
 
 
-
 const pressHandler = (id) =>{
   console.log(id)
-  return id;
 }
 
 
