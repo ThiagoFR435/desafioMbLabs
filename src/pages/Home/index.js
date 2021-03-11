@@ -33,8 +33,6 @@ export default function Home() {
         source={require('../../assets/bannerSmall.png')}
         style={styles.image}
         />
-
-      
         <View style={styles.textContainer}>
           <Text style={styles.text}>Eventos</Text>
           <TouchableOpacity style={{position:'absolute', right: 0, alignSelf: 'center'}}>
@@ -49,31 +47,35 @@ export default function Home() {
     </View>
         <View style={styles.line} />
        
+
         <ScrollView>
         
-        <Text style={styles.textIngresso}>
-          Ingressos 
-        </Text>
-
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets img={require('../../assets/1.png')} text = {eventos[0]?.titulo} cost= {eventos[0]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
-          <Tickets img={require('../../assets/2.png')} text = {eventos[1]?.titulo} cost={eventos[1]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
-        </View>
-
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets img={require('../../assets/1.png')} text = {eventos[2]?.titulo} cost= {eventos[2]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
-          <Tickets img={require('../../assets/2.png')} text = {eventos[3]?.titulo} cost={eventos[3]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
-        </View>
-
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Tickets img={require('../../assets/1.png')} text = {eventos[3]?.titulo} cost= {eventos[4]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
-          <Tickets img={require('../../assets/2.png')} text = {eventos[4]?.titulo} cost={eventos[4]?.valor} onClick={() => navigation.navigate('Detail')}></Tickets>
-        </View>  
-
+        <FlatList
+          data={eventos}
+          keyExtractor={(eventos) => eventos.id}
+          renderItem={EventosShow}
+        />
         </ScrollView>
         
       </View>
   );
+}
+
+function EventosShow(item)
+{
+  const {id, titulo, desc, tipo, foto, valor} = item.item
+
+  console.log(foto);
+  console.log(typeof(foto));
+  return(
+
+    <View>
+      
+      <Tickets img={{ uri: foto}} text = {titulo} cost= {valor} onClick={() => navigation.navigate('Detail')}></Tickets>
+
+    </View>
+    
+  )
 }
 
 const styles = StyleSheet.create({
