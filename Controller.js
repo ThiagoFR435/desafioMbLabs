@@ -115,6 +115,19 @@ app.get('/pedido',async(req,res)=>{
     res.status(200).json(pedidos);
     console.log(pedidos);
 });
+//Busca Um só pedido
+app.get('/pedido/:id',async(req,res)=>{
+    
+  const {id} = req.params;
+
+  const user = await pedido.findAll({
+      where: {
+        idUsuario: id
+      }
+    });
+  
+  res.status(200).send(user);
+});
 
 //Cria Pedido
 app.post('/pedido/:idUsuario',async(req,res)=>{

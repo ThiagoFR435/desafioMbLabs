@@ -3,21 +3,18 @@ import { Assets } from '@react-navigation/stack';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {View, Text, TouchableOpacity,TextInput, StyleSheet} from 'react-native';
+import { set } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MenuArea from '../../../component/MenuArea';
 import api from '../../../services/api.js';
 
 
-//onChangeText={text=>setSenhaAntiga(text)}
-
-
 export default function Perfil({navigation}) {
 
   const [idUser, setIdUser ] = useState(null);
-  const [senhaAntiga, setSenhaAntiga ] = useState(null);
-  const [novaSenha, setNovaSenha ] = useState(null);
-  const [confNovaSenha, setConfNovaSenha ] = useState(null);
-  const [msg, setMsg ] = useState(null);
+  const [nome, setNome ] = useState(null);
+  const [sobrenome, setSobrenome ] = useState(null);
+  const [email, setEmail ] = useState(null);
 
   useEffect(()=>{
       async function getIdUser(){
@@ -25,54 +22,44 @@ export default function Perfil({navigation}) {
         let json=JSON.parse(response);
         //console.log(json.id);
         setIdUser(json.id);
+        return json.id;
       }
       getIdUser();
-  });
-  
-  async function sendForm(){
-    let response=await fetch('http://192.168.0.11:3000/verificaSenha',{
-        method:'POST',
-        body:JSON.stringify({
-          id: idUser,
-          senhaAntiga: senhaAntiga,
-          novaSenha: novaSenha,
-          confNovaSenha: confNovaSenha
-        }),
-        headers:{
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
-    });
+      async function getDados(){
+        const id = await getIdUser();
+        console.log("Resultado" , id);
+        let result=await api.get(`/usuario/${id}`).then((response) =>{
+          //console.log(response.data);
+          return response.data;
+          //setInfos(response.data);
+      });
+    //console.log(result[0]);
+    
+    setNome(result[0].nome);
+    setSobrenome(result[0].sobrenome);
+    setEmail(result[0].email);
 
-   let json=await response.json();
-   setMsg(json);
+
   }
+    getDados();
+      
+}, []);
+  
+  
 
-  const [info, setInfos] = React.useState([]);
-
-  React.useEffect(() =>{
-    api.get('/usuario/1').then((response) =>{
-      console.log(response.data);
-      setInfos(response.data);
-  });
-  }, []);
 
  return (
     <View style={styles.container}>
       <MenuArea title='Perfil' navigation={navigation}/>
       <View>
-        <Text>Teste</Text>
+        <Text>{nome}</Text>
+        <Text>{sobrenome}</Text>
+        <Text>{email}</Text>
       </View>
       <View>
-        <Text>{msg}</Text>
-        <TextInput placeholder='Senha Antiga' onChangeText={text=>setSenhaAntiga(text)}/>
-        <TextInput placeholder='Nova Senha' onChangeText={text=>setNovaSenha(text)} />
-        <TextInput placeholder='Confirme Nova Senha'onChangeText={text=>setConfNovaSenha(text)}/>
-        <TouchableOpacity onPress={()=>sendForm()}>
-          <Text>Trocar</Text>
-        </TouchableOpacity>
+        <Text>{idUser}</Text>
+       
       </View>
-      
 
     </View>
   );
