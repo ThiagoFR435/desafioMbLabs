@@ -54,8 +54,7 @@ export default function Perfil({navigation}) {
       <Text  style={styles.textContent} >Seus dados</Text>
       <View style={styles.info}>
         <Text style={styles.textList} >Código: {idUser}</Text>
-        <Text style={styles.textList} >Nome: {nome}</Text>
-        <Text style={styles.textList} >Sobrenome: {sobrenome}</Text>
+        <Text style={styles.textList} >Nome: {nome} {sobrenome}</Text>
         <Text style={styles.textList} >Email: {email}</Text>
       </View>
       
