@@ -16,7 +16,7 @@ let evento=models.Evento;
 //Login
 app.post('/login',async(req,res)=>{
     let response=await usuario.findOne({
-        where:{nome:req.body.name, senha: req.body.password}
+        where:{email:req.body.name, senha: req.body.password}
     });
     if(response === null){
         res.send(JSON.stringify('errorSenha'))

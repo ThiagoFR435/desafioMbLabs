@@ -94,13 +94,13 @@ export default function Login() {
             />
             <Text style={styles.loginMsg(display)}>Usuário ou Senha inválidos!</Text>
             <TextInput 
-              placeholder='Usuário:'
+              placeholder='Email'
               style={styles.loginInput} 
               onChangeText={text=>setUser(text)}
             />
             <TextInput 
               style={styles.loginInput} 
-              placeholder='Senha:' 
+              placeholder='Senha' 
               secureTextEntry={true} 
               onChangeText={text=>setPassword(text)}
             />
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     loginMsg:(text='none')=>({
       fontWeight: "bold",
-      fontSize: 22,
+      fontSize: 20,
       color: "red",
       marginTop: 10,
       marginBottom: 10,
