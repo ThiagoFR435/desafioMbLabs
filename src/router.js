@@ -59,12 +59,12 @@ function Routes(){
                 <Stack.Screen
                     name="Pedidos"
                     component={Pedidos}
-                    options={{headerShown: true}}
+                    options={{headerShown: false}}
                 />
                 <Stack.Screen
                     name="Sucesso"
                     component={Sucesso}
-                    options={{headerShown: true}}
+                    options={{headerShown: false}}
                 />
                 
             </Stack.Navigator>

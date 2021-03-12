@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet, Button} from 'react-native';
-import Footer from '../../component/Footer';
+import Footer from '../../component/Footer/index.js';
 import api from '../../services/api.js';
 import { useNavigation } from '@react-navigation/native';
 import  {useState,useEffect} from 'react';
@@ -57,27 +57,30 @@ export default function Detail({route, navigation}) {
 }
  return (
    
-   <ScrollView style={styles.container}>
+   <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
      <View style={styles.ImgViewContainer}>
-      <Image style={{ width:175, height:175, borderRadius: 10 }}
+      <Image style={styles.image}
         source={{ uri: evento.foto}}
       />
      </View>
-
-      
-      <Text>User Id:{idUser}</Text>
-      <Text>Id Evento: {evento.id} </Text>
-      <Text>Evento: {evento.titulo}</Text>
-      <Text>Desc: {evento.desc}</Text>
-      <Text>Tipo: {evento.tipo}</Text>
-      <Text>Valor: {evento.valor}</Text>
+     <View>
+     <Text></Text>
+      <Text style={[styles.title,styles.textTitle]} >{evento.titulo}</Text>
+      <Text style={[styles.title,styles.textTitle]}>R${evento.valor}</Text>
+      <Text></Text>
+      <Text style={styles.textDesc}>{evento.desc}</Text>
 
       <View style={styles.line}/>
 
       <Button title="Comprar" onPress={() => enviarCompra(evento.id,idUser,"Pago",evento.valor)} />
-   </ScrollView>
 
+      <Footer/>
+     </View>
+
+     
+   </ScrollView>
   );
+  
   
 }
 
@@ -89,33 +92,37 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     paddingHorizontal: 25
   },
-  ImgViewContainer: {
-
+  textDesc: {
+    fontSize: 16,
+    lineHeight: 20,
   },
   image:{
-    width: '100%'
+    width:175, 
+    height:175,
+    borderRadius: 10, 
+    alignSelf: 'center'
   },
   title:{
     fontFamily: 'Anton_400Regular',
-    paddingHorizontal: '2%'
+
   },
   textContent:{
     fontSize: 16,
-    lineHeight: 25,
+    lineHeight: 20,
     marginVertical: '2%',
     paddingHorizontal: '2%'
   },
   textTitle: {
     fontSize: 22,
-    marginVertical: '2%'
   },
   textList:{
     fontSize: 16,
-    lineHeight: 25,
+    lineHeight: 20,
   },
   line:{
     borderWidth: 1,
     borderBottomColor: '#DDD',
     marginVertical: '2%',
+    opacity: 0.2
   }
 });

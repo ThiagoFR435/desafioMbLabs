@@ -28,8 +28,8 @@ export default function Areauser({navigation}) {
 
  return (
       <Tab.Navigator
-        activeColor='#999'
-        inactiveColor='#fff'
+        activeColor='#000'
+        inactiveColor='#847C7C'
         barStyle={styles.areaTab}
       >
       <Tab.Screen 
@@ -37,7 +37,7 @@ export default function Areauser({navigation}) {
         component={Perfil}
         options={{
           tabBarIcon: ()=>(
-            <Icon name="user" size={20} color="#fff"/>
+            <Icon name="user" size={25} color="#000"/>
           )
         }}
       />
@@ -46,7 +46,7 @@ export default function Areauser({navigation}) {
         component={Pedidos}
         options={{
           tabBarIcon: ()=>(
-            <Icon name="ticket" size={20} color="#fff"/>
+            <Icon name="ticket" size={25} color="#000"/>
           )
         }}
       />
@@ -61,39 +61,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
   areaTab:{
-    backgroundColor:'#000',
-    fontSize:20,
+    backgroundColor:'#fff',
+    fontSize:22,
     fontWeight:'bold',
-    color:'#000'
-  },
-  image:{
-    width: '100%'
-  },
-  title:{
-    fontFamily: 'Anton_400Regular',
-    paddingHorizontal: '2%',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  textContent:{
-    fontSize: 16,
-    lineHeight: 25,
-    marginVertical: '2%',
-    paddingHorizontal: '2%'
-  },
-  textTitle: {
-    fontSize: 22,
-    marginVertical: '2%',
-    alignItems: 'center',
-    justifyContent: 'center'
+    textShadowColor: '#000',
+    borderColor: '#000',
+    borderTopWidth: 0.2
   },
   textList:{
-    fontSize: 16,
+    fontSize: 22,
     lineHeight: 25,
   },
-  line:{
-    borderWidth: 1,
-    borderBottomColor: '#DDD',
-    marginVertical: '2%',
-  }
+  
 });

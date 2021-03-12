@@ -84,7 +84,7 @@ export default function Home() {
                 </View>
             </View>
             <View style={styles.line} />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <FlatList
                     numColumns={2}
                     data={filterData}

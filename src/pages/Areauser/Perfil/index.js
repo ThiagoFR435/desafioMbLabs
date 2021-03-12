@@ -52,7 +52,7 @@ export default function Perfil({navigation}) {
     <View style={styles.container}>
       <MenuArea title='Perfil' navigation={navigation}/>
       <View>
-        <Text>Seus dados</Text>
+        <Text  style={styles.textContent} >Seus dados</Text>
         <Text>Código: {idUser}</Text>
         <Text>Nome: {nome}</Text>
         <Text>Sobrenome: {sobrenome}</Text>
@@ -73,5 +73,35 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     alignItems:'center',
     justifyContent:'flex-start'
-  }
+  },
+  textDesc: {
+    fontSize: 16,
+    lineHeight: 20,
+  },
+  image:{
+    width:175, 
+    height:175,
+    borderRadius: 10, 
+    alignSelf: 'center'
+  },
+  title:{
+    fontFamily: 'Anton_400Regular',
+
+  },
+  textContent:{
+    fontSize: 25,
+    lineHeight: 20,
+    marginVertical: '2%',
+    paddingHorizontal: '2%',
+    paddingVertical: '5%',
+    alignSelf: 'center',
+    fontFamily: 'Anton_400Regular',
+  },
+  textTitle: {
+    fontSize: 22,
+  },
+  textList:{
+    fontSize: 16,
+    lineHeight: 20,
+  },
   });

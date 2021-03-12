@@ -12,11 +12,11 @@ export default function MenuArea(props){
     return (
         <View style={styles.areaMenu}>
            <TouchableOpacity style={styles.buttonHome} onPress={()=>props.navigation.navigate('Home')}>
-             <Icon name="home" size={20} color="#fff"/>
+             <Icon name="home" size={20} color="#000"/>
            </TouchableOpacity>
            <Text style={styles.areaTitle}>{props.title}</Text>
            <TouchableOpacity style={styles.buttonLogout} onPress={()=>logout()}>
-             <Icon name="sign-out" size={20} color="#fff"/>
+             <Icon name="sign-out" size={20} color="#000"/>
            </TouchableOpacity>
             
         </View>
@@ -30,9 +30,12 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         paddingBottom: 10,
         width: '100%',
-        backgroundColor:'#000',
+        backgroundColor:'#fff',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        borderColor: '#000',
+        borderBottomWidth: 0.2
+
     },
     buttonHome:{
         textAlign:'left'
