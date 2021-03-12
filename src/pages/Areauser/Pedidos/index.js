@@ -7,6 +7,7 @@ import { set } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MenuArea from '../../../component/MenuArea';
 import api from '../../../services/api.js';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 
 export default function Pedido({navigation}) {
@@ -87,15 +88,17 @@ function PedidoShow(item)
   const {titulo} = '';
   return(
 
-    <View style={styles.content}>
-      <View style={styles.info} >
-        <Text style={styles.text} >Número do pedido: {id}</Text>
-        <Text style={styles.text} >Evento: {idEvento}</Text>
-        <Text style={styles.text} >Situação: {confirmacaopg}</Text>
-        <Text style={styles.text}>Valor: R${valor}</Text>
-        <Text style={styles.text}>Data da compra: {createdAt}</Text>
-      </View>
-    </View>
+    
+      <Card style={styles.card} >
+          <Card.Content>
+              <Title>Pedido Nº {id}</Title>
+              <Paragraph>Evento: {idEvento}</Paragraph>
+              <Paragraph>Situação: {confirmacaopg}</Paragraph>
+              <Paragraph>Valor: R${valor}</Paragraph>
+              <Paragraph>Data da compra: {createdAt}</Paragraph>
+        </Card.Content>
+      </Card>
+  
     
   )
 }
@@ -127,4 +130,21 @@ const styles = StyleSheet.create({
     alignSelf : 'flex-start',
     paddingLeft: '2%',
   },
-  });
+  card:{
+    paddingLeft: '20%',
+    paddingRight: '20%',
+    marginVertical: 16,
+    marginHorizontal: '2%',
+    paddingHorizontal: '10%',
+    borderRadius: 30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    
+    elevation: 6,
+  }
+});
