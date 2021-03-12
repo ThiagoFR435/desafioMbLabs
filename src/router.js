@@ -8,7 +8,6 @@ import Home from './pages/Home/';
 import Detail from './pages/Detail/';
 import Login from './pages/Login/';
 import Areauser from './pages/Areauser';
-import Cart from './pages/Cart/';
 import Perfil from './pages/Areauser/Perfil'
 import Pedidos from './pages/Areauser/Pedidos'
 import Sucesso from './pages/Sucesso/';
@@ -51,11 +50,6 @@ function Routes(){
                     name="Areauser"
                     component={Areauser}
                     options={{headerShown: false}}
-                />
-                <Stack.Screen
-                    name="Cart"
-                    component={Cart}
-                    options={{headerShown: true}}
                 />
                 <Stack.Screen
                     name="Perfil"

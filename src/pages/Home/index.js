@@ -31,9 +31,9 @@ export default function Home() {
   const searchFilter = (text) =>{
     if(text){
       const newData = masterData.filter((item) =>{
-        const itemData = item.titulo ? item.titulo 
+        const itemData = item.tipo.toUpperCase() ? item.tipo.toUpperCase()
               : '';
-        const textData = text;
+        const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
       setfilterData(newData);

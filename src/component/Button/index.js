@@ -6,7 +6,7 @@ export default function Button() {
     const navigation = useNavigation();
  return (
    <View style={styles.container}>
-       <TouchableOpacity onPress={() => navigation.navigate('Cart')} style={styles.buttonContainer}>  
+       <TouchableOpacity >  
            <Text style={styles.title} >COMPRAR</Text>
        </TouchableOpacity>
    </View>
