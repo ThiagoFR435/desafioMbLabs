@@ -53,26 +53,28 @@ export default function Detail({route, navigation}) {
       console.log(error);
     });
 
-    
 }
  return (
    
    <ScrollView style={styles.container}>
-   <Image style={{width:175, height:175}}
-    source={{ uri: evento.foto}}
-   />
-  
-  <Text>User Id:{idUser}</Text>
-  <Text>Id Evento: {evento.id} </Text>
-  <Text>Evento: {evento.titulo}</Text>
-  <Text>Desc: {evento.desc}</Text>
-  <Text>Tipo: {evento.tipo}</Text>
-  <Text>Valor: {evento.valor}</Text>
+      <Image style={{width:175, height:175}}
+        source={{ uri: evento.foto}}
+      />
+      
+      <Text>User Id:{idUser}</Text>
+      <Text>Id Evento: {evento.id} </Text>
+      <Text>Evento: {evento.titulo}</Text>
+      <Text>Desc: {evento.desc}</Text>
+      <Text>Tipo: {evento.tipo}</Text>
+      <Text>Valor: {evento.valor}</Text>
 
-  <Button title="Comprar" onPress={() => enviarCompra(evento.id,idUser,"Pago",evento.valor)} />
+      <View style={styles.line}/>
 
+      <Button title="Comprar" onPress={() => enviarCompra(evento.id,idUser,"Pago",evento.valor)} />
    </ScrollView>
+
   );
+  
 }
 
 const styles = StyleSheet.create({

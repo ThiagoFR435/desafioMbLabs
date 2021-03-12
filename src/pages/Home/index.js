@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet , ScrollView, Image, TouchableOpacity, FlatList} from 'react-native';
+import { View, Text, StyleSheet , ScrollView, Image, TouchableOpacity, FlatList, TextInput} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 import Tickets from '../../component/Tickets'
 import { useNavigation } from '@react-navigation/native'
@@ -15,41 +15,78 @@ export default function Home() {
   var rs = "R$";
 
   const [eventos, setEventos] = React.useState([]);
+  const [filterData, setfilterData] = React.useState([]);
+  const [masterData, setmasterData] = React.useState([]);
+  const [search, setsearch] = React.useState('');
 
   React.useEffect(() =>{
     api.get("/evento").then((response) =>{
       //console.log(response.data);
       setEventos(response.data);
+      setfilterData(response.data);
+      setmasterData(response.data);
   });
   }, []);
-  
+
+  const searchFilter = (text) =>{
+    if(text){
+      const newData = masterData.filter((item) =>{
+        const itemData = item.titulo ? item.titulo 
+              : '';
+        const textData = text;
+        return itemData.indexOf(textData) > -1;
+      });
+      setfilterData(newData);
+      setsearch(text);
+    }else{
+      setfilterData(masterData);
+      setsearch(text);
+    }
+}
+
+const ItemSeparatorView = () => {
+  return(
+    <View
+      style={{height:0.5, width: '100%', backgroundColor:'#c8c8c8'}}
+    />
+  )
+}
+
  return (
+
+  
 
    <View style={styles.container}>
       <View style={styles.header}>
-        <Image
-        source={require('../../assets/bannerSmall.png')}
-        style={styles.image}
-        />
+            
         <View style={styles.textContainer}>
           <Text style={styles.text}>Eventos</Text>
+          
           <TouchableOpacity style={{position:'absolute', right: 0, alignSelf: 'center'}}>
-          <FontAwesome
-           name="user-circle-o" 
-           size={24} 
-           color="black" 
-           onPress={() => navigation.navigate('Areauser')}
-           />
+                <FontAwesome
+                      name="user-circle-o" 
+                      size={24} 
+                      color="black" 
+                      onPress={() => navigation.navigate('Areauser')}
+                />
           </TouchableOpacity>
         </View>
+        <TextInput
+                style={styles.textInputStyle}
+                value={search}
+                placeholder="Pesquise aqui"
+                underlineColorAndroid = "trasparent"
+                onChangeText={(text) => searchFilter(text)}
+            />
     </View>
         <View style={styles.line} />
         <ScrollView>
         
         <FlatList
           numColumns={2}
-          data={eventos}
+          data={filterData}
           keyExtractor={(eventos) => eventos.id}
+          ItemSeparatorComponent={ItemSeparatorView}
           renderItem={({ item })=>(
             <TouchableOpacity onPress={() => navigation.navigate('Detail',{itemId: item.id})}>
                 <View style={styles.item}>
@@ -73,16 +110,21 @@ export default function Home() {
 }
 
 
-const pressHandler = (id) =>{
-  console.log(id)
-}
-
-
 const styles = StyleSheet.create({
   container:{
     flex:1,
     width: '100%',
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    marginTop: 0,
+  },
+  textInputStyle:{
+    height:40,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    marginTop: 32,
+    borderColor: '#333',
+    backgroundColor: 'white'
   },
   header:{
     marginBottom: 8
@@ -94,7 +136,8 @@ const styles = StyleSheet.create({
   textContainer:{
     flexDirection: 'row',
     marginVertical: '5%',
-    marginHorizontal: '5%'
+    marginHorizontal: '5%',
+    
   },
   text:{
     fontFamily: 'Anton_400Regular',

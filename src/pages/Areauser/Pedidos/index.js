@@ -60,7 +60,6 @@ export default function Pedido({navigation}) {
   
   
 
-
  return (
     <View style={styles.container}>
       <MenuArea title='Pedidos' navigation={navigation}/>
