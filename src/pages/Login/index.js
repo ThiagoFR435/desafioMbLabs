@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#333'
+        backgroundColor: '#f5f5f5'
     },
     logo:{
       width:150,
@@ -141,15 +141,18 @@ const styles = StyleSheet.create({
       fontSize: 16,
       padding: 7,
       marginBottom: 1,
-      width: 300
+      width: 300,
+      borderColor: '#333', 
+      borderWidth: 0.5,
+      borderRadius: 10
     },
     loginButton:{
       width: 300,
       height:42,
       padding: 12,
-      backgroundColor: '#FFF',
+      backgroundColor: '#333',
       marginTop:10,
-      borderRadius: 4,
+      borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 5
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
     loginButtonText:{
       fontWeight: "bold",
       fontSize: 16,
-      color: "#333"
+      color: "#FFF"
     }
 
 

@@ -90,7 +90,7 @@ function PedidoShow(item)
 
     
       <Card style={styles.card} >
-          <Card.Content>
+          <Card.Content >
               <Title>Pedido Nº {id}</Title>
               <Paragraph>Evento: {idEvento}</Paragraph>
               <Paragraph>Situação: {confirmacaopg}</Paragraph>
@@ -106,12 +106,12 @@ const styles = StyleSheet.create({
     
   container:{
     flex:1,
-    backgroundColor:'#fff',
+    backgroundColor:'#f5f5f5',
     alignItems:'center',
     justifyContent:'flex-start'
   },
   text: {
-    fontSize: 17,
+    fontSize: 30,
     lineHeight: 20,
   },
   content:{

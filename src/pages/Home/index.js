@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: "100%",
-        backgroundColor: "#FFF",
+        backgroundColor: "#f5f5f5",
         marginTop: 0,
     },
     eventosHeading: {
