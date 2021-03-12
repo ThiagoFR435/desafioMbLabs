@@ -42,22 +42,22 @@ export default function Pedido({navigation}) {
         return response.data;
         
     });
-     const idEvento = result2[0].idEvento
-      let result3=await api.get(`/evento/${idEvento}`).then((response) =>{
-      //console.log(response.data);
-      setEventos=(response.data);
-      return response.data;
+      const idEvento = result2[0].idEvento
+        let result3=await api.get(`/evento/${idEvento}`).then((response) =>{
+        //console.log(response.data);
+        setEventos=(response.data);
+        return response.data;
   });
   
-    setConfirmacaoPg(result2[0].confirmacaopg);
-    setValor(result2[0].valor);
-    setCreateAt(result2[0].createdAt);
-    setTitulo(result3[0].titulo);
-  }
+      setConfirmacaoPg(result2[0].confirmacaopg);
+      setValor(result2[0].valor);
+      setCreateAt(result2[0].createdAt);
+      setTitulo(result3[0].titulo);
+
+}
     getDados();
       
 }, []);
-  
   
 
  return (
@@ -84,21 +84,21 @@ export default function Pedido({navigation}) {
 function PedidoShow(item)
 {
   const {id, idEvento, confirmacaopg, valor, createdAt} = item.item
+  const {titulo} = '';
   return(
 
-    <View style={styles.item}>
-      <Text>Número do pedido: {id}</Text>
-      <Text>Evento: {idEvento}</Text>
-      <Text>Status: {confirmacaopg}</Text>
-      <Text>Valor: R${valor}</Text>
-      <Text>Data da compra: {createdAt}</Text>
-      <Text></Text>
-
+    <View style={styles.content}>
+      <View style={styles.info} >
+        <Text style={styles.text} >Número do pedido: {id}</Text>
+        <Text style={styles.text} >Evento: {idEvento}</Text>
+        <Text style={styles.text} >Situação: {confirmacaopg}</Text>
+        <Text style={styles.text}>Valor: R${valor}</Text>
+        <Text style={styles.text}>Data da compra: {createdAt}</Text>
+      </View>
     </View>
     
   )
 }
-
 const styles = StyleSheet.create({
     
   container:{
@@ -107,7 +107,24 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'flex-start'
   },
-  item:{
-    
-  }
+  text: {
+    fontSize: 17,
+    lineHeight: 20,
+  },
+  content:{
+    fontSize: 25,
+    lineHeight: 20,
+    marginVertical: '1%',
+    paddingHorizontal: '18%',
+    paddingVertical: '2%',
+    borderWidth: 1,
+    borderRadius: 18,
+    borderColor: '#cccccc'
+
+  },
+  info: {
+    justifyContent:'flex-start',
+    alignSelf : 'flex-start',
+    paddingLeft: '2%',
+  },
   });

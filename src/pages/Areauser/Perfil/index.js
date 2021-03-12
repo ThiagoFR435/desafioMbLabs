@@ -78,12 +78,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 20,
   },
-  image:{
-    width:175, 
-    height:175,
-    borderRadius: 10, 
-    alignSelf: 'center'
-  },
   textContent:{
     fontSize: 25,
     lineHeight: 20,
