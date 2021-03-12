@@ -3,6 +3,7 @@ import { Assets } from '@react-navigation/stack';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {View, Text, TouchableOpacity,TextInput, StyleSheet} from 'react-native';
+import { Card } from 'react-native-paper';
 import { set } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MenuArea from '../../../component/MenuArea';
@@ -51,14 +52,13 @@ export default function Perfil({navigation}) {
     <View style={styles.container}>
       <MenuArea title='Perfil' navigation={navigation}/>
       <View>
-        <Text>{nome}</Text>
-        <Text>{sobrenome}</Text>
-        <Text>{email}</Text>
+        <Text>Seus dados</Text>
+        <Text>Código: {idUser}</Text>
+        <Text>Nome: {nome}</Text>
+        <Text>Sobrenome: {sobrenome}</Text>
+        <Text>Email: {email}</Text>
       </View>
-      <View>
-        <Text>{idUser}</Text>
-       
-      </View>
+      
 
     </View>
   );

@@ -75,7 +75,6 @@ export default function Pedido({navigation}) {
       </ScrollView>
       <View>
         <Text></Text>
-       
       </View>
 
     </View>
@@ -87,15 +86,12 @@ function PedidoShow(item)
   const {id, idEvento, confirmacaopg, valor, createdAt} = item.item
   return(
 
-    
-    <View>
-      
-
-      <Text>ID: {id}</Text>
+    <View style={styles.item}>
+      <Text>Número do pedido: {id}</Text>
       <Text>Evento: {idEvento}</Text>
       <Text>Status: {confirmacaopg}</Text>
       <Text>Valor: R${valor}</Text>
-      <Text>Data: {createdAt}</Text>
+      <Text>Data da compra: {createdAt}</Text>
       <Text></Text>
 
     </View>
@@ -110,5 +106,8 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     alignItems:'center',
     justifyContent:'flex-start'
+  },
+  item:{
+    
   }
   });
