@@ -51,12 +51,12 @@ export default function Perfil({navigation}) {
  return (
     <View style={styles.container}>
       <MenuArea title='Perfil' navigation={navigation}/>
-      <View>
-        <Text  style={styles.textContent} >Seus dados</Text>
-        <Text>Código: {idUser}</Text>
-        <Text>Nome: {nome}</Text>
-        <Text>Sobrenome: {sobrenome}</Text>
-        <Text>Email: {email}</Text>
+      <Text  style={styles.textContent} >Seus dados</Text>
+      <View style={styles.info}>
+        <Text style={styles.textList} >Código: {idUser}</Text>
+        <Text style={styles.textList} >Nome: {nome}</Text>
+        <Text style={styles.textList} >Sobrenome: {sobrenome}</Text>
+        <Text style={styles.textList} >Email: {email}</Text>
       </View>
       
 
@@ -84,10 +84,6 @@ const styles = StyleSheet.create({
     borderRadius: 10, 
     alignSelf: 'center'
   },
-  title:{
-    fontFamily: 'Anton_400Regular',
-
-  },
   textContent:{
     fontSize: 25,
     lineHeight: 20,
@@ -97,11 +93,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontFamily: 'Anton_400Regular',
   },
-  textTitle: {
-    fontSize: 22,
+  info: {
+    justifyContent:'flex-start',
+    alignSelf : 'baseline',
+    paddingLeft: '2%',
   },
   textList:{
-    fontSize: 16,
-    lineHeight: 20,
+    fontSize: 18,
+    lineHeight: 30,
   },
   });
