@@ -42,9 +42,7 @@ export default function Login() {
     let compatible= await LocalAuthentication.hasHardwareAsync();
     if(compatible){
       let biometricRecords = await LocalAuthentication.isEnrolledAsync();
-      if (!biometricRecords){
-        alert('Voce nao possui biometria');
-      }else{
+      if (biometricRecords){
         let result = await LocalAuthentication.authenticateAsync();
         if(result.success){
           sendForm();
