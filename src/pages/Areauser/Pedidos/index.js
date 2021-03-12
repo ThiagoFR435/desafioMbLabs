@@ -115,9 +115,9 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   content:{
-    fontSize: 25,
+    fontSize: 20,
     lineHeight: 20,
-    marginVertical: '1%',
+    marginVertical: '2%',
     paddingHorizontal: '18%',
     paddingVertical: '2%',
     borderWidth: 1,
@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
   card:{
     paddingLeft: '20%',
     paddingRight: '20%',
-    marginVertical: 16,
-    marginHorizontal: '2%',
+    marginVertical: 10,
+    marginHorizontal: '1%',
     paddingHorizontal: '10%',
     borderRadius: 30,
     shadowColor: "#000",
