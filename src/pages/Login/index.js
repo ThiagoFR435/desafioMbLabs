@@ -31,7 +31,7 @@ export default function Login() {
     let response=await AsyncStorage.getItem('userData');
     let json=await JSON.parse(response);
     if(json != null){
-      setUser(json.nome);
+      setUser(json.email);
       setPassword(json.senha);
       setLogin(true);
     }
