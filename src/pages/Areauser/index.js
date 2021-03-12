@@ -37,7 +37,7 @@ export default function Areauser({navigation}) {
         component={Perfil}
         options={{
           tabBarIcon: ()=>(
-            <Icon name="user" size={20} color="#FFF"/>
+            <Icon name="user" size={20} color="#fff"/>
           )
         }}
       />
@@ -46,7 +46,7 @@ export default function Areauser({navigation}) {
         component={Pedidos}
         options={{
           tabBarIcon: ()=>(
-            <Icon name="ticket" size={20} color="#FFF"/>
+            <Icon name="ticket" size={20} color="#fff"/>
           )
         }}
       />

@@ -13,11 +13,9 @@ export default function Detail({route, navigation}) {
   const { itemId } = route.params;
   const [idUser, setIdUser] = useState(null);
 
-
-
-  navigation.setOptions({
+  /*navigation.setOptions({
     headerTitle: 'Página de Detalhes'
-  })
+  })*/
 
   React.useEffect(() =>{
 
@@ -34,6 +32,9 @@ export default function Detail({route, navigation}) {
       //console.log(response.data);
       setEvento(response.data[0]);
       //console.log(evento);
+      navigation.setOptions ({
+        headerTitle: response.data[0].titulo
+      })
   });
   }, []);
 
@@ -57,9 +58,12 @@ export default function Detail({route, navigation}) {
  return (
    
    <ScrollView style={styles.container}>
-      <Image style={{width:175, height:175}}
+     <View style={styles.ImgViewContainer}>
+      <Image style={{ width:175, height:175, borderRadius: 10 }}
         source={{ uri: evento.foto}}
       />
+     </View>
+
       
       <Text>User Id:{idUser}</Text>
       <Text>Id Evento: {evento.id} </Text>
@@ -79,9 +83,14 @@ export default function Detail({route, navigation}) {
 
 const styles = StyleSheet.create({
   container:{
-    flex:1,
+    flex: 1,
     width: '100%',
-    backgroundColor: '#FFF'
+    backgroundColor: '#fff',
+    paddingVertical: 25,
+    paddingHorizontal: 25
+  },
+  ImgViewContainer: {
+
   },
   image:{
     width: '100%'

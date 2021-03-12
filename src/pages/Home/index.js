@@ -100,7 +100,7 @@ export default function Home() {
                             <View style={styles.item}>
                                 <View style={styles.item2}>
                                     <Image
-                                        style={{ width: 175, height: 175 }}
+                                        style={{ width: 175, height: 175, borderRadius: 10 }}
                                         source={{ uri: item.foto }}
                                     />
                                     <Text style={styles.ticketText}>
@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         borderColor: "#333",
         backgroundColor: "white",
+        borderRadius: 10
     },
     header: {
         marginBottom: 8,
