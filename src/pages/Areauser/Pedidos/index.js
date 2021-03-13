@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { Assets } from "@react-navigation/stack";
 import React from "react";
 import { useState, useEffect } from "react";
+import { format } from "date-fns";
 import {
      View,
      Text,
@@ -99,7 +100,8 @@ export default function Pedido({ navigation }) {
 }
 
 function PedidoShow(item) {
-     const { id, titulo, confirmacaopg, valor, createdAt } = item.item;
+     const { id, titulo, confirmacaopg, valor, createdAt } = item.item; 
+     var dataFormatada = format(new Date(createdAt), "dd/MM/yyyy");
 
      return (
           <Card style={styles.card}>
@@ -108,7 +110,7 @@ function PedidoShow(item) {
                     <Paragraph>Evento: {titulo}</Paragraph>
                     <Paragraph>Situação: {confirmacaopg}</Paragraph>
                     <Paragraph>Valor: R${valor}</Paragraph>
-                    <Paragraph>Data da compra: {createdAt}</Paragraph>
+                    <Paragraph>Data da compra: {dataFormatada}</Paragraph>
                </Card.Content>
           </Card>
      );
