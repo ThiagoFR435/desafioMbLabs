@@ -69,7 +69,7 @@ export default function Login() {
     });
 
     let json=await response.json();
-    console.log(json);
+    //console.log(json);
     if(json === 'errorSenha'){
       setDisplay('flex');
       setTimeout(()=>{

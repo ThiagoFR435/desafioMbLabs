@@ -107,11 +107,10 @@ app.delete('/evento/:id',async(req,res)=>{
 
 //Busca pedidos
 app.get('/pedido',async(req,res)=>{
-    
-    const  pedidos = await pedido.findAll();
+    const pedidos = await pedido.findAll();
     res.status(200).json(pedidos);
-    //console.log(pedidos);
 });
+
 //Busca Um só pedido
 app.get('/pedido/:id',async(req,res)=>{
     
