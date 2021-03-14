@@ -20,12 +20,18 @@ import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 
 export default function Pedido({ navigation }) {
      const [idUser, setIdUser] = useState(null);
+     const [confirmacaopg, setConfirmacaoPg] = useState(null);
+     const [valor, setValor] = useState(null);
+     const [creatAt, setCreateAt] = useState(null);
+     const [titulo, setTitulo] = useState(null);
      const [pedidos, setPedidos] = useState(null);
+     const [eventos, setEventos] = useState(null);
 
      useEffect(() => {
           async function getIdUser() {
                let response = await AsyncStorage.getItem("userData");
                let json = JSON.parse(response);
+               //console.log(json.id);
                setIdUser(json.id);
                return json.id;
           }
@@ -39,7 +45,7 @@ export default function Pedido({ navigation }) {
                //Responsavel por listar todos os pedidos pelo id do usuario
                let result2 = await api.get(`/pedido/${id}`).then((response) => {
                     let listaTotal = response.data;
-                    listaTotal[0].titulo = 'FIRST ONE';
+                    listaTotal[0].titulo = '';
 
                     listaTotal.forEach(function (datalista, i) {
                          let listaPedidos = api
@@ -51,8 +57,21 @@ export default function Pedido({ navigation }) {
                     });
 
                     setPedidos(listaTotal);
-                    return listaTotal;
+                    return pedidos;
                });
+               //Responsavel por detalhar o evento
+               const idEvento = result2[0].idEvento;
+               let result3 = await api
+                    .get(`/evento/${idEvento}`)
+                    .then((response) => {
+                         setEventos = response.data;
+                         setTitulo(response.data[0].titulo);
+                         return response.data;
+                    });
+               setConfirmacaoPg(result2[0].confirmacaopg);
+               setValor(result2[0].valor);
+               setCreateAt(result2[0].createdAt);
+               setTitulo(result3[0].titulo);
           }
           getDados();
      }, []);
