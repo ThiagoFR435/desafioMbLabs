@@ -2,8 +2,11 @@ const express=require('express');
 const cors=require('cors');
 const bodyParser= require('body-parser');
 const models=require('./models');
-
 const app=express();
+const jwt = require ('jsonwebtoken');
+
+const SECRET = 'dbdesafiothiago';
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
@@ -12,16 +15,29 @@ let usuario=models.Usuario;
 let pedido=models.Pedido;
 let evento=models.Evento;
 
+function verifyJWT(req,res, next){
+    const token = req.headers['x-access-token'];
+    jwt.verify(token, SECRET, (err, decoded) =>{
+      if(err) return res.status(401).end();
+      req.id = decoded.id;
+      next();
+    })
+
+}
 
 //Login
 app.post('/login',async(req,res)=>{
+  
+    const id = req.body.name;
     let response=await usuario.findOne({
         where:{email:req.body.name, senha: req.body.password}
     });
     if(response === null){
         res.send(JSON.stringify('errorSenha'))
     }else{
-        res.send(response);
+        const token = jwt.sign({id}, SECRET, {expiresIn: 600})
+        //res.send(response);
+        return res.json({auth: true, token});
     }  
 
 });
@@ -29,7 +45,8 @@ app.post('/login',async(req,res)=>{
 //-------------Gerenciamento de Evento------------------
 
 //Busca eventos
-app.get('/evento',async(req,res)=>{
+app.get('/evento',
+async(req,res)=>{
     
     const  eventos = await evento.findAll();
     res.status(200).json(eventos);
@@ -68,7 +85,9 @@ app.post('/evento',async(req,res)=>{
 });
 
 //Edita Eventos
-app.put('/evento/:id',async(req,res)=>{
+app.put('/evento/:id',
+verifyJWT,
+async(req,res)=>{
     
     const {id} = req.params;
     const {titulo,desc,tipo,foto,valor} = req.body;
@@ -91,7 +110,9 @@ app.put('/evento/:id',async(req,res)=>{
 });
 
 //Apaga Eventos
-app.delete('/evento/:id',async(req,res)=>{
+app.delete('/evento/:id',
+verifyJWT,
+async(req,res)=>{
     
     const {id} = req.params;
 
@@ -106,7 +127,9 @@ app.delete('/evento/:id',async(req,res)=>{
 //-------------Gerenciamento de Pedido------------------
 
 //Busca pedidos
-app.get('/pedido',async(req,res)=>{
+app.get('/pedido',
+verifyJWT,
+async(req,res)=>{
     const pedidos = await pedido.findAll();
     res.status(200).json(pedidos);
 });
@@ -126,7 +149,9 @@ app.get('/pedido/:id',async(req,res)=>{
 });
 
 //Cria Pedido
-app.post('/pedido/:idUsuario',async(req,res)=>{
+app.post('/pedido/:idUsuario',
+verifyJWT,
+async(req,res)=>{
     
     const {idEvento,valor,confirmacaopg} = req.body;
     const{idUsuario} = req.params;
@@ -145,7 +170,9 @@ app.post('/pedido/:idUsuario',async(req,res)=>{
 });
 
 //Edita pedido
-app.put('/pedido/:id',async(req,res)=>{
+app.put('/pedido/:id',
+verifyJWT,
+async(req,res)=>{
     
     const{id} = req.params;
     const {idEvento,idUsuario,valor,confirmacaopg} = req.body;
@@ -167,7 +194,9 @@ app.put('/pedido/:id',async(req,res)=>{
 });
 
 //Apaga Pedido
-app.delete('/pedido/:id',async(req,res)=>{
+app.delete('/pedido/:id',
+verifyJWT,
+async(req,res)=>{
     
     const {id} = req.params;
 
@@ -183,7 +212,9 @@ app.delete('/pedido/:id',async(req,res)=>{
 //------------------Gerenciamento de Usuario----------------
 
 //Busca Todos usuarios do banco
-app.get('/usuario/',async(req,res)=>{
+app.get('/usuario/',
+verifyJWT,
+async(req,res)=>{
     
     const  usuarios = await usuario.findAll();
     res.status(200).json(usuarios);
@@ -192,7 +223,9 @@ app.get('/usuario/',async(req,res)=>{
 });
 
 //Busca Um usuario por ID
-app.get('/usuario/:id',async(req,res)=>{
+app.get('/usuario/:id',
+verifyJWT,
+async(req,res)=>{
     
     const {id} = req.params;
 
@@ -207,7 +240,8 @@ app.get('/usuario/:id',async(req,res)=>{
 
 //Cria um usuario
 
-app.post('/usuario',async(req,res)=>{
+app.post('/usuario',
+async(req,res)=>{
     
     const {nome,sobrenome,email,senha} = req.body;
    
@@ -223,7 +257,9 @@ app.post('/usuario',async(req,res)=>{
 });
 
 //Edita um usuario
-app.put('/usuario/:id',async(req,res)=>{
+app.put('/usuario/:id',
+verifyJWT,
+async(req,res)=>{
     
     const{id} = req.params;
     const {nome,sobrenome,email,senha} = req.body;
@@ -246,7 +282,9 @@ app.put('/usuario/:id',async(req,res)=>{
 
 //Apaga um usuario
 
-app.delete('/usuario/:id',async(req,res)=>{
+app.delete('/usuario/:id',
+verifyJWT,
+async(req,res)=>{
     
     const {id} = req.params;
 

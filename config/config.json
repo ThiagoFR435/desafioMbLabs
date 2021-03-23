@@ -2,8 +2,8 @@
   "development": {
     "username": "postgres",
     "password": "qweasdqwe1",
-    "database": "db_desafio",
-    "host": "127.0.0.1",
+    "database": "db_thiagodesafio",
+    "host": "dbdesafio.crtbz9tlljwx.us-east-2.rds.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {
